@@ -1,0 +1,12 @@
+---
+- name: "Copy portal db create script"
+  copy:
+    src: "{{ create_postgresql_sql }}"
+    dest: /var/tmp/create-postgresql.sql
+    mode: 0555
+
+- name: Run query from SQL script using UTF-8 client encoding for session and positional args
+#  shell: "psql -d {{ db_name }} -a -f /var/tmp/create-postgresql.sql"
+  shell: "psql -a -f /var/tmp/create-postgresql.sql"
+  become: yes
+  become_user: postgres

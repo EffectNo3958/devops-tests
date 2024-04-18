@@ -1,0 +1,15 @@
+userver1   ansible_host=192.168.1.4   ansible_user=vaga   ansible_ssh_private_key_file=/home/ansible/userver.key
+cserver1   ansible_host=192.168.1.89
+
+[STAGING]
+userver3   ansible_host=192.168.1.98
+cserver2   ansible_host=192.168.1.88  #ansible_user=root   ansible_password=root_password
+
+[PROD]
+userver0   ansible_host=192.168.1.96
+
+[ALL_LINUX:children]
+STAGING
+PROD
+
+

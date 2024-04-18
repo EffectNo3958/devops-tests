@@ -1,0 +1,12 @@
+---
+# variables file for deploy_java
+
+## Update the following two variables with relevant Java URL and Java version
+download_url: "https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz"
+java_version: "jdk-21.0.3"
+
+java_env_file: "/etc/profile.d/java.sh"
+download_folder: "/var/tmp"
+java_home: "/opt/{{ java_version }}"
+java_archive: "{{ download_folder }}{{ download_url | basename }}"
+...

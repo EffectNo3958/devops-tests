@@ -1,0 +1,9 @@
+---
+# defaults file for deploy_db
+db_user: liferay
+db_password: liferay123#$
+db_name: lportal
+create_postgresql_sql: create-postgresql.sql
+pg_hba_conf: /var/lib/pgsql/data/pg_hba.conf
+#
+#test_sql: migration.sql

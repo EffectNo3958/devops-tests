@@ -1,0 +1,4 @@
+---
+# handlers file for deploy_db
+- name: restart postgres
+  service: name=postgresql state=restarted

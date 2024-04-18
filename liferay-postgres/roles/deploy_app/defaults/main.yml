@@ -1,0 +1,11 @@
+---
+# Liferay repository: https://github.com/liferay/liferay-portal/releases
+# Specify URL to the relevant distributive
+download_url: "https://github.com/liferay/liferay-portal/releases/download/7.4.3.112-ga112/liferay-ce-portal-tomcat-7.4.3.112-ga112-20240226061339195.tar.gz"
+life_ray_version: "liferay-ce-portal-7.4.3.112-ga112"
+tomcat_version: "tomcat-9.0.83"
+
+download_folder: "/var/tmp"
+liferay_archive: "{{ download_folder }}/{{ download_url | basename }}"
+liferay_home: "/var/lib/{{ life_ray_version }}"
+...
