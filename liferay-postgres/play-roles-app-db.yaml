@@ -1,6 +1,6 @@
 ---
 - name: Deploy Liferay (PostgreSQL based)
-  hosts: cserver2
+  hosts: STAGING
   become: True
 
   roles:
