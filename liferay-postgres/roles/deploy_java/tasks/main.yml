@@ -42,6 +42,12 @@
         group: root
         recurse: yes
 
+    - name: Create a directory /usr/bin/java if it does not exist
+      file:
+        path: /usr/bin/java
+        state: directory
+        mode: '0755'
+
     - name: Make Java available for system
       command: 'alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
 
