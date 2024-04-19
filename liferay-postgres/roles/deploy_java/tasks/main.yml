@@ -48,11 +48,11 @@
         state: directory
         mode: '0755'
 
-    - name: Make Java available for system
+    - name: Make Java available for system for RedHat
       command: 'alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
       when: ansible_os_family == "RedHat"
 
-    - name: Make Java available for system
+    - name: Make Java available for system for Debian
       command: 'update-alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
       when: ansible_os_family == "Debian"
 
@@ -68,5 +68,5 @@
       file:
         state: absent
         path: "{{ java_archive }}"
- # when: java_installed.stdout == ""
+  when: java_installed.stdout == ""
 ...
