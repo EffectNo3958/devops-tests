@@ -56,12 +56,6 @@
       command: 'update-alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
       when: ansible_os_family == "Debian"
 
-    - name: Create Exports/Run java env file
-      file:
-        path: "{{ java_env_file }}"
-        state: file
-        mode: '0777'
-
     - name: Set/Configure JAVA_HOME in environment variables
       shell: "echo 'export JAVA_HOME={{ java_home }}\n export PATH=$JAVA_HOME/bin:$PATH' >> {{ java_env_file }}"
 
@@ -74,5 +68,5 @@
       file:
         state: absent
         path: "{{ java_archive }}"
-  when: java_installed.stdout == ""
+ # when: java_installed.stdout == ""
 ...
