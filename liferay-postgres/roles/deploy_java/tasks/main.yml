@@ -50,6 +50,11 @@
 
     - name: Make Java available for system
       command: 'alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
+      when: ansible_os_family == "RedHat"
+
+    - name: Make Java available for system
+      command: 'update-alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
+      when: ansible_os_family == "Debian"
 
     - name: Set/Configure JAVA_HOME in environment variables
       shell: "echo 'export JAVA_HOME={{ java_home }}\n export PATH=$JAVA_HOME/bin:$PATH' > {{ java_env_file }}"
