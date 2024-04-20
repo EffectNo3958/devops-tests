@@ -16,7 +16,7 @@
   shell: "{{ java_home }}/bin/java -version 2>&1 | grep version | awk '{print $3}' | sed 's/\"//g'"
   register: java_installed
 
-- name: Installed java version
+- name: Check installed java version
   debug: "msg={{ java_installed.stdout }}"
 
 - block:
@@ -42,14 +42,27 @@
         group: root
         recurse: yes
 
-    - name: Make Java available for system
+    - name: Create a directory /usr/bin/java if it does not exist
+      file:
+        path: /usr/bin/java
+        state: directory
+        mode: '0755'
+
+    - name: Make Java available for system for RedHat
       command: 'alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
+      when: ansible_os_family == "RedHat"
+
+    - name: Make Java available for system for Debian
+      command: 'update-alternatives --install "/usr/bin/java" "java" "{{ java_home }}/bin/java" 2000'
+      when: ansible_os_family == "Debian"
 
     - name: Set/Configure JAVA_HOME in environment variables
-      shell: "echo 'export JAVA_HOME={{ java_home }}\n export PATH=$JAVA_HOME/bin:$PATH' > {{ java_env_file }}"
+      shell: "echo 'export JAVA_HOME={{ java_home }}\n export PATH=$JAVA_HOME/bin:$PATH' >> {{ java_env_file }}"
 
     - name: Exports/Run java env file for make JAVA_HOME available globally
       shell: "source {{ java_env_file }}"
+      args:
+        executable: /bin/bash
 
     - name: Clean up
       file:
