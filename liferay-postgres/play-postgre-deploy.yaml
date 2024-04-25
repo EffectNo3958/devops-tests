@@ -7,8 +7,8 @@
     postgres_root_user: lportal
     postgres_root_pass: GQt5MTyVPuf9vsVWoWDT9YCn
     allow_world_readable_tmpfiles: true
-  block:
-    tasks:
+
+- block:
       - name: Update apt repo and cache on all Ubuntu boxes
         apt:
           update_cache: yes
@@ -73,8 +73,9 @@
           role_attr_flags: CREATEDB,SUPERUSER,CREATEROLE
           encrypted: yes
           state: present
+  when: ansible_os_family = Debian
 
-    handlers:
+  handlers:
       - name: Restart Postgresql
         systemd:
           name: postgresql
@@ -94,4 +95,3 @@
         systemd:
           name: postgresql
           enabled: yes
-  when: ansible_os_family = Debian
