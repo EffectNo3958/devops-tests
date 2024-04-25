@@ -1,0 +1,32 @@
+---
+- name: Install and set up Postgres 14 in Ubuntu 20.04
+  hosts: userver3
+  become: yes
+  gather_facts: False
+  vars:
+    postgres_db_name: lportal
+    postgres_root_user: lportal
+    postgres_root_pass: GQt5MTyVPuf9vsVWoWDT9YCn
+    allow_world_readable_tmpfiles: true
+    sql_destination: /tmp/
+    sql_filename: create-postgresql.sql
+
+  tasks:
+    - name: Create DB {{ postgres_db_name }}
+      postgresql_db:
+        name: "{{ postgres_db_name }}"
+
+    - name: Upload SQL to remote
+      copy:
+        src: roles/deploy_db/files/create-postgresql.sql
+        dest: "{{ sql_destination }}"
+        mode: 600
+#      become: yes
+#      become_user: postgres
+
+    - name: Run SQL
+      community.postgresql.postgresql_script:
+        login_user: "{{ postgres_root_user }}"
+        login_password: "{{ postgres_root_pass }}"
+        db: "{{ postgres_db_name }}"
+        path: "{{ sql_destination }}{{ sql_filename }}"
