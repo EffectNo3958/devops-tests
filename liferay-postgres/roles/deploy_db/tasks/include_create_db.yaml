@@ -4,7 +4,7 @@
 
 - name: Upload SQL to remote
   copy:
-    src: roles/deploy_db/files/create-postgresql.sql
+    src: "{{ sql_filename }}"
     dest: "{{ sql_destination }}"
     mode: 600
 #      become: yes
