@@ -8,4 +8,5 @@ tomcat_version: "tomcat-9.0.83"
 download_folder: "/var/tmp"
 liferay_archive: "{{ download_folder }}/{{ download_url | basename }}"
 liferay_home: "/var/lib/{{ life_ray_version }}"
+liferay_config_file: "portal-ext.properties"
 ...

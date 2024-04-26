@@ -31,4 +31,10 @@
     dest: "{{ item.path }}"
     mode: "a+x"
   with_items: "{{ liferay_tomcat_sh_files.files }}"
+
+- name: Upload portal-ext.properties to the App dir
+  copy:
+    src: "{{ liferay_config_file }}"
+    dest: "{{ liferay_home }}"
+    mode: 600
 ...
