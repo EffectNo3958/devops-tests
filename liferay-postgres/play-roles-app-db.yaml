@@ -2,6 +2,7 @@
 - name: Deploy Liferay (PostgreSQL based)
   hosts: STAGING
   become: True
+  gather_facts: False
 
 #  roles:
 #    - { role: deploy_java, when: ansible_os_family == 'Debian' }
