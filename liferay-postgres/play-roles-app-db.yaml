@@ -4,13 +4,17 @@
   become: True
   gather_facts: True
 
-#  roles:
-#    - { role: deploy_java, when: ansible_os_family == 'Debian' }
-#    - { role: deploy_app, when: ansible_os_family == 'Debian' }
-#    - { role: deploy_db, when: ansible_os_family == 'Debian' }
-
-  tasks:
-    - name: Start Liferay
-      shell: /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh
+  roles:
+    - block:
+        - role: deploy_java
+        - role: deploy_app
+        - role: deploy_db
       when: ansible_os_family == 'Debian'
+
+  # https://gist.github.com/jverweijL/a077dffd164fd2659963d4431e029439
+  # Install Liferay as a Service on Ubuntu 16.04
+#  tasks:
+#    - name: Start Liferay
+#      shell: /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh
+#      when: ansible_os_family == 'Debian'
 ...
