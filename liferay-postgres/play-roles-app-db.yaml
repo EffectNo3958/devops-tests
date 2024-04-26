@@ -10,6 +10,6 @@
 
   tasks:
     - name: Start Liferay
-      command: "sh {{ liferay_home  }}/tomcat-9.0.83/bin/startup.sh"
+      command: "sh /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh"
       when: ansible_os_family == 'Debian'
 ...
