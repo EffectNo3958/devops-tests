@@ -1,12 +1,18 @@
----
-- name: "Copy portal db create script"
-  copy:
-    src: "{{ create_postgresql_sql }}"
-    dest: /var/tmp/create-postgresql.sql
-    mode: 0555
+- name: Create DB {{ db_name }}
+  postgresql_db:
+    name: "{{ db_name }}"
 
-- name: Run query from SQL script using UTF-8 client encoding for session and positional args
-#  shell: "psql -d {{ db_name }} -a -f /var/tmp/create-postgresql.sql"
-  shell: "psql -a -f /var/tmp/create-postgresql.sql"
-  become: yes
-  become_user: postgres
+- name: Upload SQL to remote
+  copy:
+    src: roles/deploy_db/files/create-postgresql.sql
+    dest: "{{ sql_destination }}"
+    mode: 600
+#      become: yes
+#      become_user: postgres
+
+- name: Run SQL
+  community.postgresql.postgresql_script:
+    login_user: "{{ db_user }}"
+    login_password: "{{ db_password }}"
+    db: "{{ db_name }}"
+    path: "{{ sql_destination }}{{ sql_filename }}"
