@@ -1,6 +1,6 @@
 ---
 # defaults file for deploy_db
-db_user: liferay
+db_user: lportal
 db_password: GQt5MTyVPuf9vsVWoWDT9YCn
 db_name: lportal
 sql_destination: /tmp/

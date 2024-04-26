@@ -30,6 +30,12 @@
         role_attr_flags: CREATEDB,SUPERUSER,CREATEROLE
         encrypted: yes
         state: present
+
+    - name: Restart Postgres
+      service:
+        name: postgresql
+        state: restarted
+
   when: ansible_os_family == "Debian"
 
 - block: # For RedHat
