@@ -5,6 +5,6 @@
 
   roles:
     - { role: deploy_java  }
-    - { role: deploy_app, when: ansible_os_family == 'RedHat' }
-    - { role: deploy_db, when: ansible_os_family == 'RedHat' }
+    - { role: deploy_app }
+    - { role: deploy_db }
 ...

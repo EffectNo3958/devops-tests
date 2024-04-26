@@ -1,8 +1,5 @@
 ---
-# tasks file for deploy_db
+# tasks file for Deploying DB
 - include_tasks: include_install-packages.yaml
-- include_tasks: include_start_postgres.yaml
-- include_tasks: include_create_db_user.yaml
-#- include_tasks: include_create_db.yaml
-
-- include_tasks: include_test_connection.yaml
+- include_tasks: include_config_db.yaml
+- include_tasks: include_create_db.yaml
