@@ -10,7 +10,7 @@
 #    - { role: deploy_db, when: ansible_os_family == 'Debian' }
 
   tasks:
-    - name: Start Liferay
-      command: "sh /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh"
+    - name: Run a script with arguments (free form)
+      ansible.builtin.script: /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh
       when: ansible_os_family == 'Debian'
 ...
