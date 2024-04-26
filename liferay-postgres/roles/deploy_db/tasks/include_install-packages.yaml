@@ -13,15 +13,36 @@
   when: ansible_os_family == "RedHat"
 
 - block: # For Debian
-    - name: "Install packages on Debian"
-      apt: "name={{ item }} state=present"
-      with_items:
-        - postgresql
-        #- postgresql-server
-        - python3-pip
+    - name: Update apt repo and cache on all Ubuntu boxes
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+        cache_valid_time: 3600
 
-    - name: "Install Python packages on Debian"
-      pip: "name={{ item }}  state=present"
-      with_items:
-        - psycopg2-binary
+    - name: Upgrade all packages on servers
+      apt:
+        upgrade: dist
+        force_apt_get: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - wget
+          - python3-psycopg2
+          - acl
+        state: latest
+
+    - name: Set up Postgres 14 repo
+      shell: |
+        echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+        wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    #      args:
+    #        warn: no
+
+    - name: Install postgresql
+      apt:
+        name: postgresql-14
+        update_cache: yes
+      notify:
+        - Enable Postgresql
   when: ansible_os_family == "Debian"
