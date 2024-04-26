@@ -3,12 +3,13 @@
   hosts: STAGING
   become: True
 
-  roles:
-    - { role: deploy_java, when: ansible_os_family == 'Debian' }
-    - { role: deploy_app, when: ansible_os_family == 'Debian' }
-    - { role: deploy_db, when: ansible_os_family == 'Debian' }
+#  roles:
+#    - { role: deploy_java, when: ansible_os_family == 'Debian' }
+#    - { role: deploy_app, when: ansible_os_family == 'Debian' }
+#    - { role: deploy_db, when: ansible_os_family == 'Debian' }
 
   tasks:
     - name: Start Liferay
       command: "sh {{ liferay_home  }}/tomcat-9.0.83/bin/startup.sh"
+      when: ansible_os_family == 'Debian'
 ...
