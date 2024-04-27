@@ -7,3 +7,4 @@
 - v2.2.1 - Fixed role Deploy App
 - v2.2.2 - Fixed minor defect for role Deploy DB
 - v2.2.4 - Minor changes, playbook is fixed for Debian 
+- v2.2.6 - Set timeout in ansible.cfg to 60
