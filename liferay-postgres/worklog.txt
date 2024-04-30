@@ -23,3 +23,5 @@ https://gist.github.com/jverweijL/a077dffd164fd2659963d4431e029439
 #      shell: /var/lib/liferay-ce-portal-7.4.3.112-ga112/tomcat-9.0.83/bin/startup.sh
 #      when: ansible_os_family == 'Debian'
 #      /var/lib/liferay-ce-portal-7.4.3.112-ga112/portal-setup-wizard.properties
+
+[2024-04-30 14:41:17+0300] TODO: Verification of Java installed by `java --version`
